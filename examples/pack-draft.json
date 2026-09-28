@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "format": "perch.recipe",
+  "id": "developer-starter-draft",
+  "name": "开发者的日常（待验证）",
+  "engine": "pi",
+  "validatedProfileId": null,
+  "extensionIds": [],
+  "status": "draft"
+}

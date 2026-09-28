@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "status": "p1-technical-validation-complete-with-limitations",
+  "testedOn": "2026-09-24",
+  "platform": "win32-x64",
+  "node": "24.18.0",
+  "npm": "12.0.2",
+  "package": "@agegr/pi-web",
+  "version": "0.9.3",
+  "source": "https://registry.npmjs.org/@agegr/pi-web/-/pi-web-0.9.3.tgz",
+  "integrity": "sha512-tH7D8aGjt1UsJxuejIjw6ZJwhMqikFwlQrbG3BKZ2jEJFLLq0fHzIRXYyi5Tiaj354321hUfkOslXxYa1hxPCw==",
+  "lockSha256": "d5242a2cd7a6c416a457a8eaf7996d3e96fb8c948a3540f576f6cf50e39e8a09",
+  "license": "MIT",
+  "entry": "node_modules/@agegr/pi-web/bin/pi-web.js",
+  "args": [
+    "--hostname",
+    "127.0.0.1",
+    "--port",
+    "<port>",
+    "--no-open"
+  ],
+  "dataEnvironment": "PI_CODING_AGENT_DIR",
+  "installPolicy": "npm ci --ignore-scripts; web startup tested, not all tools",
+  "installScriptPackages": [
+    {
+      "name": "node_modules/@agegr/pi-web",
+      "version": "0.9.3"
+    },
+    {
+      "name": "node_modules/@google/genai",
+      "version": "2.21.0"
+    },
+    {
+      "name": "node_modules/esbuild",
+      "version": "0.28.2"
+    },
+    {
+      "name": "node_modules/node-pty",
+      "version": "1.2.0-beta.15"
+    },
+    {
+      "name": "node_modules/protobufjs",
+      "version": "7.6.6"
+    }
+  ],
+  "verified": [
+    "parallel-web-start",
+    "loopback-only",
+    "chinese-space-cwd",
+    "independent-data-paths",
+    "browser-workbench",
+    "force-stop-owned-process-tree",
+    "sibling-survives",
+    "restart",
+    "settings-write-isolation",
+    "settings-persist-after-restart",
+    "offline-session-fixture-isolation",
+    "node-pty-command",
+    "model-call-user-tested",
+    "locked-ci-fresh-directory-ignore-scripts",
+    "real-session-reload-after-restart",
+    "session-storage-isolation",
+    "credential-files-persist-after-restart"
+  ],
+  "unverified": [
+    "active-model-task-stop",
+    "graceful-stop",
+    "clean-machine-install",
+    "real-credential-roundtrip"
+  ],
+  "piSdk": "0.87.1"
+}

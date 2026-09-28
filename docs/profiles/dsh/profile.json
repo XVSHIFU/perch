@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "status": "p1-technical-validation-complete-with-limitations",
+  "testedOn": "2026-09-24",
+  "platform": "win32-x64",
+  "node": "24.18.0",
+  "npm": "12.0.2",
+  "package": "@deepseek-ai/dsh",
+  "version": "0.1.5-rc.3",
+  "source": "https://registry.npmjs.org/@deepseek-ai/dsh/-/dsh-0.1.5-rc.3.tgz",
+  "integrity": "sha512-c0W6Xqc4ChjFcCJkbzPeIxZQdnbKqe+QAcJzWGtogg0ZzsnZRcw3vopMyZ5oZU6E2fmyqGcyDR1sBeiCH4yHcg==",
+  "lockSha256": "b1d15789f7634756a09da2e5e94d81e9517a32013f4a1db9dce894bb31feb052",
+  "license": "MIT",
+  "entry": "node_modules/@deepseek-ai/dsh/lib/bin.js",
+  "args": [
+    "web",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "<port>",
+    "--no-open"
+  ],
+  "dataEnvironment": "DSH_HOME",
+  "installPolicy": "npm ci --ignore-scripts; web startup tested, not all tools",
+  "installScriptPackages": [
+    {
+      "name": "node_modules/@deepseek-ai/dsh-subprocess-local",
+      "version": "0.1.5-rc.3"
+    },
+    {
+      "name": "node_modules/@google/genai",
+      "version": "1.52.0"
+    },
+    {
+      "name": "node_modules/koffi",
+      "version": "3.3.1"
+    },
+    {
+      "name": "node_modules/node-pty",
+      "version": "1.2.0-beta.15"
+    },
+    {
+      "name": "node_modules/protobufjs",
+      "version": "7.6.6"
+    }
+  ],
+  "verified": [
+    "parallel-web-start",
+    "loopback-only",
+    "chinese-space-cwd",
+    "independent-data-paths",
+    "browser-workbench",
+    "force-stop-owned-process-tree",
+    "sibling-survives",
+    "restart",
+    "onboarding-settings-isolation",
+    "login-token-browser-entry",
+    "native-workspace-picker-user-tested",
+    "workspace-registration-isolation",
+    "model-call-user-tested",
+    "locked-ci-fresh-directory-ignore-scripts",
+    "real-session-reload-after-restart",
+    "session-storage-isolation",
+    "credential-files-persist-after-restart"
+  ],
+  "unverified": [
+    "active-model-task-stop",
+    "graceful-stop",
+    "clean-machine-install",
+    "real-credential-roundtrip"
+  ]
+}

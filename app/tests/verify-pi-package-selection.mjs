@@ -1,0 +1,24 @@
+import {mkdtemp,mkdir,writeFile} from 'node:fs/promises';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
+import {pathToFileURL} from 'node:url';
+import assert from 'node:assert/strict';
+import {preparePi} from '../src-tauri/src/pi-config.mjs';
+const artifact=process.argv[2];assert.ok(artifact);
+const root=await mkdtemp(join(tmpdir(),'perch-pi-multiresource-'));
+for(const key of Object.keys(process.env))if(!['PATH','SYSTEMROOT','WINDIR','COMSPEC','TEMP','TMP','PATHEXT'].includes(key.toUpperCase()))delete process.env[key];
+Object.assign(process.env,{HOME:root,USERPROFILE:root,PI_CODING_AGENT_DIR:join(root,'agent-data')});
+globalThis.fetch=async()=>{throw Error('Network disabled for package selection verification');};
+const cwd=join(root,'project'),home=join(root,'agent-data'),pkg=join(root,'package');
+await mkdir(join(cwd,'.git'),{recursive:true});await mkdir(join(pkg,'skills/example'),{recursive:true});await mkdir(join(pkg,'prompts'));
+await writeFile(join(pkg,'package.json'),JSON.stringify({name:'perch-selection-fixture',version:'1.0.0',type:'module',pi:{extensions:['extension.mjs'],skills:['skills'],prompts:['prompts']}}));
+await writeFile(join(pkg,'extension.mjs'),'export default function(api) {}');
+await writeFile(join(pkg,'skills/example/SKILL.md'),'---\nname: example\ndescription: Resource selection fixture\n---\nFixture only.');
+await writeFile(join(pkg,'prompts/example.md'),'---\ndescription: Resource selection fixture\n---\nFixture only.');
+const connection={protocol:'openai-chat',name:'Fixture',baseUrl:'http://127.0.0.1:9',defaultModel:'fixture'};
+const {DefaultResourceLoader}=await import(pathToFileURL(join(artifact,'node_modules/@earendil-works/pi-coding-agent/dist/core/resource-loader.js')).href);
+async function load(){const loader=new DefaultResourceLoader({cwd,agentDir:home,noContextFiles:true});await loader.reload();assert.equal(loader.getExtensions().errors.length,0);return {extensions:loader.getExtensions().extensions.length,skills:loader.getSkills().skills.length,prompts:loader.getPrompts().prompts.length};}
+await preparePi(home,connection,[],[],[pkg]);assert.deepEqual(await load(),{extensions:1,skills:1,prompts:1});
+await preparePi(home,connection,[],[],[{source:pkg,skills:[],prompts:[]}]);assert.deepEqual(await load(),{extensions:1,skills:0,prompts:0});
+await preparePi(home,connection,[],[],[{source:pkg,extensions:[]}]);assert.deepEqual(await load(),{extensions:0,skills:1,prompts:1});
+console.log(JSON.stringify({root,result:'Whole package loaded; per-type exclusions applied across restarts',modelCalls:0}));process.exit(0);

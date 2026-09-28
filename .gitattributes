@@ -1,0 +1,7 @@
+* text=auto eol=lf
+*.png -text
+*.ico -text
+*.zip -text
+# Embedded engine lockfiles retain the exact verified bytes.
+docs/profiles/** -text whitespace=cr-at-eol
+docs/profiles/*.md text eol=lf

@@ -1,0 +1,31 @@
+node_modules/
+target/
+dist/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+
+# Local acceptance records, handoff archives and generated prototypes
+/acceptance-*/
+/handoff/
+/preview/
+/app/verification/
+/app/.github/
+/assets/
+/perch-bird-icons.zip
+/CODEX-FIRST-TASK.md
+/START-HERE.md
+/MANIFEST.sha256
+/perch-development-plan.md
+/docs/profiles/*-results.json
+# Local databases and private credential/config exports
+*.sqlite
+*.sqlite3
+*.db
+*.pem
+*.pfx
+*.p12
+*.key
+*.pending

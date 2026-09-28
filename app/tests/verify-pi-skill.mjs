@@ -1,0 +1,25 @@
+import {mkdtemp,mkdir,cp} from 'node:fs/promises';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
+import {pathToFileURL} from 'node:url';
+import assert from 'node:assert/strict';
+import {preparePi} from '../src-tauri/src/pi-config.mjs';
+const [artifact,source]=process.argv.slice(2);
+assert.ok(artifact&&source,'Provide installed Pi artifact and imported Skill directory');
+const root=await mkdtemp(join(tmpdir(),'perch-pi-skill-load-'));
+for(const key of Object.keys(process.env)){if(!['PATH','SYSTEMROOT','WINDIR','COMSPEC','TEMP','TMP','PATHEXT'].includes(key.toUpperCase()))delete process.env[key];}
+Object.assign(process.env,{HOME:root,USERPROFILE:root,PI_CODING_AGENT_DIR:join(root,'agent-data')});
+globalThis.fetch=async()=>{throw Error('Network disabled during Skill loading verification');};
+const cwd=join(root,'project'),agentDir=join(root,'agent-data'),skillRoot=join(root,'config/managed-skills/local-skill-fixture');
+await mkdir(cwd);await mkdir(join(cwd,'.git'));await mkdir(skillRoot,{recursive:true});await cp(source,join(skillRoot,'skill'),{recursive:true});
+const connection={protocol:'openai-chat',name:'Offline fixture',baseUrl:'http://127.0.0.1:9',defaultModel:'fixture'};
+await preparePi(agentDir,connection,[],[skillRoot]);
+const {DefaultResourceLoader}=await import(pathToFileURL(join(artifact,'node_modules/@earendil-works/pi-coding-agent/dist/core/resource-loader.js')).href);
+let loader=new DefaultResourceLoader({cwd,agentDir,noContextFiles:true});await loader.reload();
+const loaded=loader.getSkills();
+assert.equal(loaded.skills.length,1);assert.equal(loaded.skills[0].name,'brand-guidelines');
+await preparePi(agentDir,connection,[],[]);
+loader=new DefaultResourceLoader({cwd,agentDir,noContextFiles:true});await loader.reload();
+assert.equal(loader.getSkills().skills.length,0);
+console.log(JSON.stringify({root,loaded:loaded.skills.map(skill=>({name:skill.name,filePath:skill.filePath})),diagnostics:loaded.diagnostics,disabledSkillCount:loader.getSkills().skills.length},null,2));
+process.exit(0);

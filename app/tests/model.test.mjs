@@ -1,0 +1,7 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {initialInstances,packs,switchEngine,addPack,validateManifest,restoreInstance,loadState} from '../src/model.mjs';
+test('跨引擎组合保留通用能力并移除另一引擎专用扩展',()=>{assert.deepEqual(switchEngine('Pi',['bridge','rules','web']),['rules','web']);assert.deepEqual(addPack('Pi',['web','rules'],packs[1]),{engine:'DSH',ids:['rules','research']})});
+test('导入拒绝未知能力、不匹配引擎、过长名称，并去除重复项',()=>{const m={format:'perch-pack/v1',name:'测试',engine:'Pi',extensions:['rules','rules']};assert.deepEqual(validateManifest(m).extensions,['rules']);for(const extensions of [['bridge'],['shell-command'],['broken'],[null]])assert.throws(()=>validateManifest({...m,extensions}));assert.throws(()=>validateManifest({...m,name:'x'.repeat(61)}));assert.throws(()=>validateManifest({...m,engine:'unknown'}))});
+test('恢复只修改目标实例，且停止运行状态',()=>{const xs=structuredClone(initialInstances);xs[0].name='after';const snap={instance:{...initialInstances[0],status:'running'}};const restored=restoreInstance(xs,snap);assert.equal(restored[0].name,'日常开发');assert.equal(restored[0].status,'ready');assert.equal(restored[1],xs[1]);assert.equal(xs[0].name,'after')});
+test('重新打开不把缓存运行状态冒充真实进程',()=>{const xs=structuredClone(initialInstances);xs[0].status='running';assert.equal(loadState(JSON.stringify({schema:1,instances:xs})).instances[0].status,'ready');assert.equal(loadState(JSON.stringify({schema:1,instances:xs})).instances[2].status,'error');assert.equal(loadState('bad json'),null);assert.equal(loadState('{"schema":1,"instances":[]}'),null)});
