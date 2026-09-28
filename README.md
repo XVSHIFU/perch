@@ -17,9 +17,7 @@
 
 ## 界面预览
 
-> **启动台截图待补充**：山景、工作环境列表和当前环境摘要。
-<!-- 截图文件：docs/images/launchpad.png；放好图片后，将下一行移出注释并删除上面的占位说明。 -->
-<!-- ![栖点启动台](docs/images/launchpad.png) -->
+![启动台](docs/images/launchpad.png)
 
 ## 栖点能做什么
 
@@ -29,9 +27,9 @@
 
 可以克隆实例试用新组合，利用恢复点回退配置，或在恢复中心找回已删除的实例。
 
-> **实例截图待补充**：实例列表与打开的实例详情抽屉。
-<!-- 截图文件：docs/images/instances.png -->
-<!-- ![独立实例与详情](docs/images/instances.png) -->
+![DSH 与 Pi 实例列表](docs/images/instances.png)
+
+![实例详情与独立配置](docs/images/instance-details.png)
 
 ### 挑选组合，也能制作自己的组合
 
@@ -39,9 +37,11 @@
 
 版本选择位于创建流程和实例版本管理中。历史版本与预览版可以进入目录，安装前会解析相应工件和兼容要求；版本变更可先查看差异。
 
-> **整合包截图待补充**：组合卡片与组合清单抽屉。
-<!-- 截图文件：docs/images/packs.png -->
-<!-- ![整合包浏览与组合清单](docs/images/packs.png) -->
+![整合包卡片](docs/images/packs.png)
+
+![DSH 日常开发组合清单](docs/images/pack-dsh.png)
+
+![Pi 轻量开发组合清单](docs/images/pack-pi.png)
 
 ### 在同一个市场里查找扩展与 Skills
 
@@ -49,17 +49,23 @@
 
 插件、Skills、主题、桌宠和预设按各自生态处理。资源声明不支持当前环境时会说明原因，不会把两种引擎的扩展当作可以直接互装。
 
-> **市场截图待补充**：资源列表与包含安装目标、主要操作的详情。
-<!-- 截图文件：docs/images/market.png -->
-<!-- ![扩展市场](docs/images/market.png) -->
+![扩展市场与资源筛选](docs/images/market.png)
+
+![资源介绍与仓库来源](docs/images/resource-details.png)
+
+读取清单后，选择安装目标并解析组合，再确认安装。
+
+![安装清单与目标选择](docs/images/install-manifest.png)
 
 ### 读清介绍，再决定是否安装
 
 软件内置带时间的公开目录快照，首次打开即可浏览，仍可手动刷新或继续同步。来源网页在原生抽屉中打开；README 优先作者提供的中文版，支持语言切换、图片、表格与章节目录。
 
-> **README 截图待补充**：正文与展开的悬浮目录，保留父层抽屉。
-<!-- 截图文件：docs/images/readme.png -->
-<!-- ![README 阅读与章节目录](docs/images/readme.png) -->
+![中文 README、语言切换与章节目录](docs/images/readme.png)
+
+也可以在来源抽屉中浏览上游网页，返回后继续查看资源。
+
+![原生抽屉中的 DSH 工坊网页](docs/images/source-page.png)
 
 ## 快速开始
 
@@ -90,6 +96,8 @@
 3. 选择项目文件夹、引擎版本和模型连接，保存实例。
 4. 安装所需组件，然后启动工作台。DSH / Pi 工作台会在默认浏览器中打开。
 5. 需要添加资源时，进入“扩展市场”，确认目标实例与变更摘要后安装。更改运行中的实例前先停止工作台。
+
+![创建实例并选择已有模型连接](docs/images/create-instance.png)
 
 ## 数据、升级与恢复
 
@@ -147,3 +155,7 @@ npm run desktop:build
 栖点代码采用 [MIT License](LICENSE)。
 
 感谢 DSH、Pi、Tauri、React、marked 和 Lobe Icons 等上游项目。第三方引擎、资源与商标归各自作者所有，适用各自的许可证；详见 [第三方说明](app/THIRD_PARTY/README.md)。
+
+## Friends
+
+- [Linux.Do](https://linux.do/) — A new ideal community
