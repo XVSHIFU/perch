@@ -1,5 +1,11 @@
 # 开发进度
 
+## 2026-09-28 · v1.0.0 MIT 与发行材料
+
+- 用户选择 MIT 并已退出旧窗口。新增根 LICENSE、包元数据与安装包许可文件；README 改为正式用户介绍，覆盖功能、运行要求、快速开始、数据/升级、源码构建和当前边界，预留5处真实截图，文件名与替换方式见 docs/images/README.md。
+- Tauri 完整构建通过（含 TypeScript/Vite 与 Rust release），独立 EXE / NSIS 最终时间均为 **2026-09-28 11:05:01 +08:00**，文件版本1.0.0。路径：`app/src-tauri/target/release/perch-desktop.exe`、`app/src-tauri/target/release/bundle/nsis/Perch Studio Lab_1.0.0_x64-setup.exe`。发行 ZIP、安装包副本和 SHA256SUMS 位于 `handoff/release-v1.0.0/`；ZIP 完整性及内含EXE摘要一致已核对，NSIS脚本包含MIT与现有第三方许可文件。
+- UI：仅移除重复返回，沿用用户此前认可结果，本轮未打开窗口复验。功能：编译与产物检查通过，未重跑下载/安装/模型链路。发布：材料已准备，正式发布等待用户补充README截图；不把构建成功视为重新通过安装验收。未操作鼠标、未自动启动软件、未覆盖安装版。
+
 ## 2026-09-28 · v1.0.0 首个正式版准备
 
 - 用户确认其余界面基本可用，以当前版本作为首个正式版；来源网页抽屉移除额外“网页后退”，只保留返回上一级，关闭、刷新与外部打开沿用。前端 TypeScript/Vite 构建通过；未重复原生网页、安装或模型验收。

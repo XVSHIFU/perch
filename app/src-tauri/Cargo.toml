@@ -3,6 +3,8 @@ name = "perch-desktop"
 version = "1.0.0"
 description = "Perch desktop manager for DSH and Pi workspaces"
 edition = "2021"
+license = "MIT"
+repository = "https://github.com/XVSHIFU/perch"
 
 [build-dependencies]
 tauri-build = { version = "2", features = [] }
